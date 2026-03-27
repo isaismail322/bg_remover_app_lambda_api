@@ -19,6 +19,8 @@
 3. Configure the function to mount the layer; this will expose `/opt/onnx-models/u2net.onnx` at runtime.
 4. Optionally set `ONNX_MODEL_PATH` to override the default path (`/opt/onnx-models/u2net.onnx`), which is useful if your layer places the model elsewhere.
 
+Download link https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2net.onnx
+
 ## Lambda Deployment Checklist
 1. Install dependencies into the deployment package (or build in a container matching the Lambda runtime):
    ```sh
