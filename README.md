@@ -30,5 +30,15 @@
 3. Point an API Gateway HTTP API at `lambda_handler` and pass through binary/base64 bodies if you send base64 directly; otherwise encode back to base64 before invoking.
 4. Log output goes to CloudWatch; the handler already logs warnings and stack traces when exceptions occur.
 
+## Building a Local U²-Net Model
+
+- Use the helper script to download the pretrained U²-Net variant (default `u2net`) via `torch.hub`, optionally override the checkpoint, and export it to ONNX:
+  ```sh
+  python build_u2net.py --output path/to/u2net.onnx
+  ```
+- Choose a specific variant through `--variant {u2net,u2netp}`, change the dummy tensor size with `--size`, and target the desired ONNX opset with `--opset`.
+- Provide `--checkpoint` after `--no-pretrained` to load a custom state dict instead of the hub weights, and use `--force-reload` to refresh the download.
+- The script depends on [`build_u2net.py:1`](build_u2net.py:1) and requires [`requirements.txt:1`](requirements.txt:1) for `torch` alongside the existing runtime packages.
+
 ## Sample Event
 See the template in [`event.json:1`](event.json:1) for the expected payload structure. Replace the placeholder with a real base64-encoded image when testing.
